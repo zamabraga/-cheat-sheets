@@ -62,12 +62,16 @@ echo "subjectAltName=DNS.1:your-dns.record,IP.1:257.10.10.1" >> extfile.cnf
 
 ```bash
 openssl x509 -req -sha256 -days 365 -in cert.csr -CA ca.pem -CAkey ca-key.pem -out cert.pem -extfile extfile.cnf -CAcreateserial
+
+# gera pfx
+openssl pkcs12 -export -in cert.pem -inkey cert-key.pem -out cert.pfx  
 ```
 
 ### Validando o certificado
 
 ```bash
 openssl verify -CAfile ca.pem -verbose cert.pem
+
 ```
 
 ## Instalando certificado CA como trusted root CA
